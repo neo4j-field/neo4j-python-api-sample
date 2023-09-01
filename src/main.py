@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 
 from neomodel import DoesNotExist, config
 from .database_models import Artist, Song, Playlist
-from .api_models import ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
+from .api_models import AlbumAPI, ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
 
 config.DATABASE_URL = "bolt://neo4j:password@localhost:7687/spotify"
 
@@ -34,6 +34,29 @@ async def get_artists(page_size: int = 10, page_number: int = 0):
         )
         for a in artists
     ]
+
+
+@app.get("/songs")
+async def get_song(song_uid: str):
+    song = Song.nodes.get(uid=song_uid)
+    return SongAPI(
+        uid=song.uid,
+        title=song.title,
+        loudness=song.loudness,
+        liveness=song.liveness,
+        tempo=song.tempo,
+        valence=song.valence,
+        instrumentalness=song.instrumentalness,
+        danceability=song.danceability,
+        speechiness=song.speechiness,
+        duration=song.duration,
+        mode=song.mode,
+        popularity=song.popularity,
+        acousticness=song.acousticness,
+        key=song.key,
+        energy=song.energy,
+        albums=[AlbumAPI(uid=a.uid) for a in song.albums.all()],
+    )
 
 
 @app.post("/playlists")
