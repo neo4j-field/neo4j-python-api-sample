@@ -5,8 +5,7 @@ from neomodel import DoesNotExist, config
 from .database_models import Artist, Song, Playlist
 from .api_models import ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
 
-neo4j_dsn = "bolt://neo4j:password@localhost:7687/spotify"
-config.DATABASE_URL = neo4j_dsn
+config.DATABASE_URL = "bolt://neo4j:password@localhost:7687/spotify"
 
 
 # Create app
@@ -60,11 +59,3 @@ async def create_playlist(input: PlaylistInput):
             for s in playlist.songs.all()
         ],
     )
-
-
-# curl -X POST -H "Content-Type: application/json" -d '{
-#   "title": "The Hives Best Of",
-#   "songs": ["7r68k5cbrF0GiFGSY538MW", "05pYGBaNqoIqsy5FjsnL1o"]
-# }' http://localhost:8000/playlists
-
-# {"uid":"2721c44d238f4de4888ddd7f7eca834e","title":"The Hives Best Of","songs":[{"uid":"05pYGBaNqoIqsy5FjsnL1o","title":"1000 Answers","popularity":0},{"uid":"7r68k5cbrF0GiFGSY538MW","title":"A.K.A. I-D-I-O-T","popularity":0}]}
