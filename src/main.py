@@ -2,8 +2,8 @@
 from fastapi import FastAPI, HTTPException
 
 from neomodel import DoesNotExist, config
-from .database_models import Artist, Song, Playlist
-from .api_models import AlbumAPI, ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
+from database_models import Artist, Song, Playlist
+from api_models import AlbumAPI, ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
 
 config.DATABASE_URL = "bolt://neo4j:password@localhost:7687/spotify"
 
@@ -70,10 +70,8 @@ async def create_playlist(input: PlaylistInput):
             song = Song.nodes.get(uid=_song)
             playlist.songs.connect(song)
 
-    except DoesNotExist as e:
-        raise HTTPException(status_code=500, detail="Item not found")
-    except Exception as e:
-        print(e)
+    except DoesNotExist as exc:
+        raise HTTPException(status_code=500, detail="Item not found") from exc
     return PlaylistAPI(
         uid=playlist.uid,
         title=playlist.title,
