@@ -1,12 +1,10 @@
 """Application main file."""
 from fastapi import FastAPI, HTTPException
 
-from neomodel import DoesNotExist, config
-from database_models import Artist, Song, Playlist
-from api_models import AlbumAPI, ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
-
-config.DATABASE_URL = "bolt://neo4j:password@localhost:7687/spotify"
-
+from neomodel import DoesNotExist
+from .database_models import Artist, Song, Playlist
+from . import config
+from .api_models import AlbumAPI, ArtistAPI, PlaylistAPI, SongAPI, PlaylistInput
 
 # Create app
 app = FastAPI(title="neomodel sample project")

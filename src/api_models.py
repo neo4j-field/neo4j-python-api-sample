@@ -1,3 +1,16 @@
+"""
+Classes for representing music data, from the API point of view.
+
+It provides both classes as returned by the API, and also Input classes for creating objects.
+
+Classes:
+- AlbumAPI: Represents an album in the music database.
+- SongAPI: Represents a song in the music database.
+- ArtistAPI: Represents an artist in the music database.
+- PlaylistAPI: Represents a playlist in the music database.
+- PlaylistInput: Input to provide in a POST request to create a playlist.
+
+"""
 from typing import List, Optional
 from pydantic import BaseModel
 
