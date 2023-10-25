@@ -36,7 +36,7 @@ class SongAPI(BaseModel):
     key: int
     energy: float
 
-    albums: Optional[List[AlbumAPI]]
+    albums: Optional[List[AlbumAPI]] = None
 
 
 class ArtistAPI(BaseModel):

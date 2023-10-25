@@ -26,7 +26,23 @@ async def get_artists(page_size: int = 10, page_number: int = 0):
             uid=a.uid,
             name=a.name,
             songs=[
-                SongAPI(uid=s.uid, title=s.title, popularity=s.popularity)
+                SongAPI(
+                    uid=s.uid,
+                    title=s.title,
+                    popularity=s.popularity,
+                    loudness=s.loudness,
+                    liveness=s.liveness,
+                    tempo=s.tempo,
+                    valence=s.valence,
+                    instrumentalness=s.instrumentalness,
+                    danceability=s.danceability,
+                    speechiness=s.speechiness,
+                    duration=s.duration,
+                    mode=s.mode,
+                    acousticness=s.acousticness,
+                    key=s.key,
+                    energy=s.energy,
+                )
                 for s in a.songs.all()
             ],
         )
