@@ -69,3 +69,13 @@ neomodel_install_labels src/database_models.py --db=bolt://neo4j:password@localh
 
 This will look at [database_models.py](/src/database_models.py) and create constraints for properties with `unique_index=True` and indexes for properties with `index=True`.
 
+
+## Customization
+
+If you want to start tuning this sample API to your existing Neo4j database, you can use the inspection script, available from neomodel version 5.2.0 :
+
+```cmd
+# This will create a file with all classes to match your db, including indexes and constraints
+neomodel_inspect_database --db=bolt://neo4j:password@localhost:7687/spotify --write-to src/custom_database_models.py
+```
+

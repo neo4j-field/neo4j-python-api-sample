@@ -4,14 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-neomodel = "~=5.1.1"
+neomodel = "~=5.2.0"
 fastapi = "*"
 uvicorn = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+python_version = "3.12"
 
 [scripts]
 dev = "uvicorn --host=0.0.0.0 --port=8000 src.main:app --reload"
